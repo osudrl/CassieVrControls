@@ -34,34 +34,47 @@ const unsigned char letters[] = {
 
 int main(int argc, char *argv[])
 {
-	
-
-	char *stringEnd;
-	double num = strtod(argv[1], &stringEnd);
-	printf("lmoa %s\n",argv[1]);
-	printf("hai %f \n" , num);
-	printf("hai %d \n" , (int) num);
-	printf("hai %d \n" , round(num));
-	//unsigned char letter = letters[10];
-	//printf("Binary representation to decimal: %d\n", letter);
-	//printf("letter representation: %c \n", matchToMorse(letter));
+	//char *stringEnd;
+	//double num = strtod(argv[1], &stringEnd);
+	//printf("lmoa %s\n",argv[1]);
+	//printf("hai %f \n" , num);
+	//printf("hai %d \n" , (int) num);
+	//printf("hai %d \n" , round(num));
+	unsigned char letter = letters[9];
+	printf("Binary representation to decimal: %d\n", letter);
+	printf("letter representation: %c \n", matchToMorse(letter));
+	printf("length of morse:%d\n", lengthOfMorse(letter));
+	printBits(letter);
 	return 0;
 }
 
+void printBits(unsigned char letter)
+{
+	for(int i = 0; i < 8; i++)
+	{
+		printf("Bit %d of %c is %d\n", i, matchToMorse(letter), getBit(letter,i));
+	}
+}
+
+int getBit(unsigned char letter, int index)
+{
+	return (letter >> (7 - index)) & 1;
+}
 
 int lengthOfMorse(unsigned char letter)
 {
     int howLong = 0;
-    for (int y = 0; y < 3; y++) {
+    for (int y = 0; y < 3; y++) 
+    {
         int bit = (letter >> (7 - y)) & 1;
         int exponent = 2 - y;
-        howLong += (round(pow(2, exponent)) * bit);
+        howLong += (kpow(2, exponent) * bit);
     }
     return howLong;
 }
 
 
-int round(double d)
+int kround(double d)
 {
 	int bot = (int) d;
 	int top = (int) d+1;
@@ -75,9 +88,14 @@ int round(double d)
 }
 
 
-double pow(double base, double power)
+int kpow(int base, int power)
 {
-
+	int ret;
+	for (int i = 0; i < power; i++)
+	{
+		ret *= base;
+	}
+	return ret;
 }
 
 char matchToMorse(unsigned char morse)
