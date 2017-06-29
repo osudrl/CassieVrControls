@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
 	printf("Binary representation to decimal: %d\n", letter);
 	printf("letter representation: %c \n", matchToMorse(letter));
 	printf("length of morse:%d\n", lengthOfMorse(letter));
-	printBits(letter);
+	//printBits(letter);
 	return 0;
 }
 
@@ -81,7 +81,7 @@ int lengthOfMorse(unsigned char letter)
         int powResult = kpow(2, exponent);
         int toAdd = (powResult * bit);
         howLong += toAdd;
-        printf("Debug... i=%d, exponent=%d, bit=%d, howlong=%d, powResult=%d, toAdd=%d \n",i,exponent,bit,howLong,powResult,toAdd);
+        //printf("Debug... i=%d, exponent=%d, bit=%d, howlong=%d, powResult=%d, toAdd=%d \n",i,exponent,bit,howLong,powResult,toAdd);
     }
     return howLong;
 }
