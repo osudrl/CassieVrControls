@@ -40,7 +40,17 @@ int main(int argc, char *argv[])
 	//printf("hai %f \n" , num);
 	//printf("hai %d \n" , (int) num);
 	//printf("hai %d \n" , round(num));
-	unsigned char letter = letters[9];
+
+	int index=12;
+
+	if(argc > 1)
+	{
+		char *stringEnd;
+		double dindex = strtod(argv[1], &stringEnd);
+		index = (int) dindex;
+	}
+
+	unsigned char letter = letters[index];
 	printf("Binary representation to decimal: %d\n", letter);
 	printf("letter representation: %c \n", matchToMorse(letter));
 	printf("length of morse:%d\n", lengthOfMorse(letter));
@@ -64,36 +74,25 @@ int getBit(unsigned char letter, int index)
 int lengthOfMorse(unsigned char letter)
 {
     int howLong = 0;
-    for (int y = 0; y < 3; y++) 
+    for (int i = 0; i < 3; i++) 
     {
-        int bit = (letter >> (7 - y)) & 1;
-        int exponent = 2 - y;
-        howLong += (kpow(2, exponent) * bit);
+        int bit = (letter >> (7 - i)) & 1;
+        int exponent = 2 - i;
+        int powResult = kpow(2, exponent);
+        int toAdd = (powResult * bit);
+        howLong += toAdd;
+        printf("Debug... i=%d, exponent=%d, bit=%d, howlong=%d, powResult=%d, toAdd=%d \n",i,exponent,bit,howLong,powResult,toAdd);
     }
     return howLong;
 }
 
 
-int kround(double d)
-{
-	int bot = (int) d;
-	int top = (int) d+1;
-	float botD = d - ((float) bot);
-	float topD = ((float) top) - d;
-
-	if(botD < topD)
-		return bot;
-	else
-		return top;
-}
-
-
 int kpow(int base, int power)
 {
-	int ret;
+	int ret = 1;
 	for (int i = 0; i < power; i++)
 	{
-		ret *= base;
+		ret = base * ret;
 	}
 	return ret;
 }
