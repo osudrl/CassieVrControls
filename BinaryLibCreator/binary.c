@@ -1,6 +1,5 @@
 #include "binary.h"
 #include <stdio.h>
-#include "kmath.h"
 
 const unsigned char letters[26] = {
     /*A*/ 0b01001000,
@@ -48,6 +47,7 @@ char matchToMorse(unsigned char morse)
         if (morse == letters[i])
             return 65 + i;
     }
+    return 64;
 }
 int lengthOfMorse(unsigned char letter)
 {
@@ -63,3 +63,14 @@ int lengthOfMorse(unsigned char letter)
     }
     return howLong;
 }
+
+int kpow(int base, int power)
+{
+    int ret = 1;
+    for (int i = 0; i < power; i++)
+    {
+        ret = base * ret;
+    }
+    return ret;
+}
+

@@ -4,7 +4,6 @@
 #include "bintest.h"
 
 #include "binary.h"
-#include "math.h"
 
 
 int main(int argc, char *argv[])
