@@ -43,7 +43,7 @@ int getBit(unsigned char letter, int index)
 }
 char matchToMorse(unsigned char morse)
 {
-    for (int i = 0; i < sizeof(letters); i++) {
+    for (unsigned int i = 0; i < sizeof(letters); i++) {
         if (morse == letters[i])
             return 65 + i;
     }
