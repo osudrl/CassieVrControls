@@ -1,20 +1,26 @@
 #include <stdio.h>   
 #include <time.h>   
+#include <inttypes.h>
 
-int main()   
-{   
-    clock_t t1, t2;  
-    t1 = clock();   
-    int i;
-    for(i = 0; i < 1000000; i++)   
-    {   
-        int x = 90;  
-    }   
+long int timeDiffMillis(struct timespec* timeA_p, struct timespec* timeB_p)
+{
+  return (((timeA_p->tv_sec * 1000000000) + timeA_p->tv_nsec) -
+           ((timeB_p->tv_sec * 1000000000) + timeB_p->tv_nsec)) / 1000000;
+}
 
-    t2 = clock();   
+int main(int argc, char **argv)
+{
+  struct timespec start, end;
+  clock_gettime(CLOCK_MONOTONIC, &start);
 
-    float diff = ((float)(t2 - t1) / ((float) (CLOCKS_PER_SEC))) * 1000;   
-    printf("%f",diff);   
+  char input[50];
+  scanf("%50s",input);
 
-    return 0;   
+  clock_gettime(CLOCK_MONOTONIC, &end);
+
+  long int intTE  = timeDiffMillis(&end, &start);
+
+  printf("This much time elapsed: %lu", intTE);
+
+  return 0; 
 }
